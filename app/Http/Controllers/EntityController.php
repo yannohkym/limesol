@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\EntityOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 class EntityController extends Controller
 {
     public function fetch(){
-        $response = Http::get('https://api.publicapis.org/entries',[
-            ]
-            );
-        $entries=$response->json();
+
+        $client = new Client();
+        $response = $client->get('https://api.publicapis.org/entries');
+        $entries = json_decode($response->getBody());
         dd($entries);
         foreach ($entries as $entry){
             $data = new EntityOne();
@@ -34,7 +35,7 @@ return 'Entries from the  api were saved';
     public function saveToEntity1(){
 
 //a script that can login to a router as an admin panel and extract the list of connected devices
-        // should also be able to change the ssid of the wifi.
+//// should also be able to change the ssid of the wifi.
     }
     public function saveToEntity2(){
 
