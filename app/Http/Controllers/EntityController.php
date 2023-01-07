@@ -13,10 +13,11 @@ class EntityController extends Controller
         $client = new Client();
         $response = $client->get('https://api.publicapis.org/entries');
         $entries = json_decode($response->getBody());
-        //dd($entries->entries[0]);
+       // dd($entries->entries[0]);
         $array = $entries->entries;
+        //dd($array);
         $chunks = array_chunk($array, floor(count($array) / 3));
-       // dd($chunks);
+        dd($chunks);
 
         foreach ($chunks as $i => $items) {
             foreach ($items as $item) {
@@ -37,13 +38,21 @@ class EntityController extends Controller
 
         return 'Entries from the  api were saved';
     }
-    public function saveToEntity1(){
+    public function endpoint(Request $request,EntityOne $entries){
+        //$entries =$entries->all();
+        $entries = EntityOne::where('cors', '=', 'yes')->get();
+        dd($entries[0]);
+        // do something with the data
+        // return a response
+        return response()->json([
+            'success' => true,
+            'data' => $entries,
+        ]);
 
-//a script that can login to a router as an admin panel and extract the list of connected devices
-//// should also be able to change the ssid of the wifi.
     }
     public function saveToEntity2(){
-
+        //a script that can login to a router as an admin panel and extract the list of connected devices
+        //// should also be able to change the ssid of the wifi.
     }
     public function saveToEntity3(){
 

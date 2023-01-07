@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/data',[\App\Http\Controllers\EntityController::class,'fetch']);
+Route::get('/endpoint',[\App\Http\Controllers\EntityController::class,'endpoint']);
 Route::get('/', function () {
     return view('welcome');
 });
